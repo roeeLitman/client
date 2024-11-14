@@ -1,4 +1,4 @@
-export interface IOrganizations extends Document {
+export interface IOrganizations {
     name: string;
     resources: [{ name: string; amount: number }];
     budget: number;

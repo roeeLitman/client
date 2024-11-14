@@ -52,7 +52,7 @@ export default function Register() {
                 {loction === "IDF" && (
                     <select onChange={(e) => setloction(e.target.value)}>
                         <option value=" - North">North</option>
-                        <option value=" - North">North</option>
+                        <option value=" - South">North</option>
                         <option value=" - West Bank">West Bank</option>
                         <option value=" - Center">Center</option>
                     </select>

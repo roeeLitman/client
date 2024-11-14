@@ -1,30 +1,24 @@
-import {
-    ActionReducerMapBuilder,
-    createAsyncThunk,
-    createSlice,
-} from "@reduxjs/toolkit";
-import { DataStatus, userState } from "../../types/redux";
-import { IUser } from "../../types/IUser";
+import { ActionReducerMapBuilder, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { DataStatus } from "../../types/redux";
 
-const initialState: userState = {
+
+const initialState = {
     error: null,
     status: DataStatus.IDLE,
     user: null,
 };
 
-export const fetchDetails = createAsyncThunk(
-    "organization",
-    async (
-        _,
-        thunkApi
-    ) => {
-        try {
-            const token = JSON.parse(localStorage.getItem("user") || "").token
 
-            const res = await fetch("http://localhost:1414/api/user", {
+
+export const fetchGetAllAttack = createAsyncThunk(
+    "user/allattack",
+    async (_, thunkApi) => {
+        try {
+            const token = JSON.parse(localStorage.getItem("user") || "").token;
+            const res = await fetch("http://localhost:1414/api/attack/", {
                 headers: {
-                    "Authorization": token,
                     "Content-Type": "application/json",
+                    Authorization: token,
                 },
             });
             if (res.status != 200) {
@@ -43,23 +37,24 @@ export const fetchDetails = createAsyncThunk(
     }
 );
 
-const organizationSlice = createSlice({
-    name: "organization",
+const userSlice = createSlice({
+    name: "attack",
     initialState,
     reducers: {},
     extraReducers: (builder: ActionReducerMapBuilder<any>) => {
         builder
-            .addCase(fetchDetails.pending, (state) => {
+            .addCase(fetchGetAllAttack.pending, (state) => {
                 state.status = DataStatus.LOADING;
                 state.error = null;
                 state.user = null;
             })
-            .addCase(fetchDetails.fulfilled, (state, action) => {
+            .addCase(fetchGetAllAttack.fulfilled, (state, action) => {
                 state.status = DataStatus.SUCCESS;
                 state.error = null;
-                state.user = action.payload as unknown as IUser;
+                state.user = action.payload 
+                localStorage.setItem("user", JSON.stringify(state.user));
             })
-            .addCase(fetchDetails.rejected, (state, action) => {
+            .addCase(fetchGetAllAttack.rejected, (state, action) => {
                 state.status = DataStatus.FAILED;
                 state.error = action.error as string;
                 state.user = null;
@@ -67,4 +62,4 @@ const organizationSlice = createSlice({
     },
 });
 
-export default organizationSlice;
+export default userSlice;
