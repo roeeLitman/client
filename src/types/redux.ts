@@ -12,3 +12,11 @@ export interface userState {
     status: DataStatus;
     user: null | IUser;
 }
+
+export interface IAttack {
+    username:string
+    nameOfMissel: string
+    create_at: Date
+    arrived_in: number
+    status: string
+}
