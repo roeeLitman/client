@@ -9,18 +9,17 @@ export default function Login() {
     const dispatch = useAppDispatch();
     const  user  = useAppSelector((state) => state.user.user);
     const [username, setUsername] = useState<string>("");
-    const [password, setPassword] = useState<string>("");
+    const [password, setPassword] = useState<string>("");    
 
     useEffect(() => {
-        if (!user?._id) return        
-        navigate('/organization')
+        if (!user) return        
         console.log(user);
+        navigate('/organization')
 
       }, [user]);
 
       useEffect(() => {
         if (user?._id) {
-            console.log(user);
 
             navigate('/organization')
         }
@@ -28,6 +27,7 @@ export default function Login() {
 
   return (
     <div>
+        <h1>login</h1>
         <div>
             <input onChange={(e) => setUsername(e.target.value)} placeholder='username' type="text" />
             <input onChange={(e) => setPassword(e.target.value)} placeholder='password' type="text" />
