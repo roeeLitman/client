@@ -54,7 +54,7 @@ const userSlice = createSlice({
                 state.status = DataStatus.SUCCESS;
                 state.error = null;
                 state.user = action.payload as unknown as IUser;
-                localStorage.setItem("user", JSON.stringify(state.user));
+                localStorage.setItem("user", JSON.stringify(state.user));                
             })
             .addCase(fetchLogin.rejected, (state, action) => {
                 state.status = DataStatus.FAILED;

@@ -1,7 +1,14 @@
 import React, { useState } from "react";
+import { useAppDispatch, useAppSelector } from "../../redux/store";
+import { useNavigate } from "react-router-dom";
 
 export default function Register() {
-    const [nameOrganization, setNameOrganization] = useState<string>("");
+
+    const  user  = useAppSelector((state) => state.user.user);
+    const navigate = useNavigate()
+    const dispatch = useAppDispatch();
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
 
     return (
         <div>
