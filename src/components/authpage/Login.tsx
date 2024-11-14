@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { useAppDispatch, useAppSelector } from '../../redux/store';
 import { fetchLogin } from '../../redux/slise/userSlice';
-import { useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 
 export default function Login() {
 
     const navigate = useNavigate()
     const dispatch = useAppDispatch();
-    const { user } = useAppSelector((state) => state.user);
+    const  user  = useAppSelector((state) => state.user.user);
     const [username, setUsername] = useState<string>("");
     const [password, setPassword] = useState<string>("");
 
@@ -32,6 +32,7 @@ export default function Login() {
             <input onChange={(e) => setUsername(e.target.value)} placeholder='username' type="text" />
             <input onChange={(e) => setPassword(e.target.value)} placeholder='password' type="text" />
             <button onClick={() => dispatch(fetchLogin({ username, password }) )} >login</button>
+            <NavLink to={"/register"}>register</NavLink>
         </div>
     </div>
   )
