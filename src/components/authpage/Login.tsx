@@ -8,6 +8,7 @@ export default function login() {
         <div>
             <input placeholder='username' type="text" />
             <input placeholder='password' type="text" />
+            <button>login</button>
         </div>
     </div>
   )
